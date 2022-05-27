@@ -1,0 +1,15 @@
+.main {
+  padding-top: 15px;
+}
+
+.main__choose-all {
+  display: flex;
+}
+
+.main__item {
+  padding-top: 20px;
+}
+
+.main__item__todo {
+  display: flex
+}

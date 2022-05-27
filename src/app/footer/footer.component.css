@@ -1,0 +1,40 @@
+.footer {
+  padding-top: 30px;
+}
+
+.footer__input {
+  width: 100%;
+  height: 35px;
+  margin-right: 15px;
+  background: transparent;
+  outline: none;
+  border-radius: 25px;
+  border: 2px solid #000;
+  transition: .2s;
+}
+
+.footer__input:hover {
+  border: 2px solid #803287;
+
+}
+
+.footer__input:focus-visible {
+  border: 2px solid #803287;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+.footer__input[type=text] {
+  font-size: 18px;
+  padding-left: 15px;
+  color: #c1abc5;
+}
+
+.footer__input[type=text]:focus-visible {
+  font-size: 18px;
+  color: #803287;
+}
+
+.footer__input::placeholder {
+  color: #c1abc5;
+  font-size: 14px;
+}

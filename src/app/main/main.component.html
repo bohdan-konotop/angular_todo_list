@@ -1,0 +1,13 @@
+<main class="main">
+	<div class="main__choose-all">
+		<input type="checkbox">
+		<span class="main__choose-all__text">All</span>
+	</div>
+	<div *ngFor="let item of todoList" class="main__item">
+		<div class="main__item__todo">
+			<input type="checkbox" [checked]="item.active">
+			<span class="main__item__todo__text">{{item.text}}</span>
+		</div>
+		<button class="main__btn">Delete</button>
+	</div>
+</main>

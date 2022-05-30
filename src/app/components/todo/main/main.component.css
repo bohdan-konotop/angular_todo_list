@@ -18,3 +18,8 @@
 .main__item__todo {
   display: flex
 }
+
+.todo__completed-text {
+  color: #c4b1c8;
+  text-decoration: line-through;
+}

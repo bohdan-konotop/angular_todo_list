@@ -6,7 +6,7 @@
 	<div *ngFor="let item of todoList; index as i" class="main__item">
 		<div class="main__item__todo">
 			<input type="checkbox" [checked]="item.active" (change)="changeCheckbox(i)">
-			<span class="main__item__todo__text">{{item.text}}</span>
+			<span [ngClass]="{'todo__completed-text': item.active}" class="main__item__todo__text">{{item.text}}</span>
 		</div>
 		<button (click)="deleteTodo(i)" class="main__btn">Delete</button>
 	</div>

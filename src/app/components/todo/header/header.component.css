@@ -1,0 +1,7 @@
+.header {
+  border-bottom: 2px solid #c1abc5;
+}
+
+.header__active-count {
+  color: #803287;
+}

@@ -1,0 +1,20 @@
+.main__item__todo__text, .main__choose-all__text {
+  padding-left: 7px;
+  align-self: center;
+}
+
+.main {
+  padding-top: 15px;
+}
+
+.main__choose-all {
+  display: flex;
+}
+
+.main__item {
+  padding-top: 20px;
+}
+
+.main__item__todo {
+  display: flex
+}

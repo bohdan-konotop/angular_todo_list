@@ -1,0 +1,5 @@
+<div class="wrapper">
+	<app-header [todoList]="todoList" (newActiveRemovedEvent)="deleteActive($event)"></app-header>
+	<app-main [todoList]="todoList" (newDeleteTodoEvent)="deleteTodo($event)"></app-main>
+	<app-add-todo (newTodoEvent)="addTodo($event)"></app-add-todo>
+</div>

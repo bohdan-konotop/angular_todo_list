@@ -1,0 +1,5 @@
+<form class="form__add-todo" (keydown.enter)="$event.preventDefault()">
+	<input [formControl]="todo" (keydown.enter)="onSubmit()" id="todo" type="text" name="todo"
+				 class="form__add-todo__input" placeholder="Add Todo..">
+	<button (click)="onSubmit()" type="button" class="form__add-todo__btn">Add</button>
+</form>

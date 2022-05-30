@@ -1,0 +1,13 @@
+<main *ngIf="todoList.length > 0" class="main">
+	<div class="main__choose-all">
+		<input type="checkbox" (change)="allCheckbox()" [checked]="all">
+		<span class="main__choose-all__text">All</span>
+	</div>
+	<div *ngFor="let item of todoList; index as i" class="main__item">
+		<div class="main__item__todo">
+			<input type="checkbox" [checked]="item.active" (change)="changeCheckbox(i)">
+			<span class="main__item__todo__text">{{item.text}}</span>
+		</div>
+		<button (click)="deleteTodo(i)" class="main__btn">Delete</button>
+	</div>
+</main>

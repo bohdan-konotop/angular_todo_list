@@ -1,33 +1,38 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { TodoList } from "../todo.component";
+import { TodoService } from "../services/todo.service";
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css', '../styles/base.css']
 })
-export class MainComponent {
-  @Input() todoList: TodoList[] = [];
-  @Output() newDeleteTodoEvent = new EventEmitter<TodoList[]>()
+export class MainComponent implements OnInit {
 
   all: boolean = false;
 
   deleteTodo(todoId: number) {
-    this.todoList = this.todoList.filter((todo, index) => index !== todoId);
-    this.newDeleteTodoEvent.emit(this.todoList);
+    this.todoService.deleteTodo(todoId);
   }
 
   changeCheckbox(i: number) {
-    this.todoList[i].active = !this.todoList[i].active;
-    this.newDeleteTodoEvent.emit(this.todoList);
+    this.todoService.changeCheckbox(i);
     this.all = false;
   }
 
   allCheckbox() {
-    this.todoList.map(todo => {
-      return todo.active = !this.all;
-    })
+    this.todoService.allCheckbox(this.all)
     this.all = !this.all;
-    this.newDeleteTodoEvent.emit(this.todoList);
+  }
+
+  todoList: TodoList[] = [];
+
+  ngOnInit():void {
+    this.todoService.getTodoList().subscribe(todoList => {
+      this.todoList = todoList;
+    })
+  }
+
+  constructor(private todoService: TodoService) {
   }
 }

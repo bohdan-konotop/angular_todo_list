@@ -1,4 +1,5 @@
-import {Component, Output, Input, EventEmitter} from '@angular/core';
+import {Component, Output, Input, EventEmitter, OnInit} from '@angular/core';
+import { TodoService } from "../services/todo.service";
 import {TodoList} from "../todo.component";
 
 @Component({
@@ -6,16 +7,27 @@ import {TodoList} from "../todo.component";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css', '../styles/base.css']
 })
-export class HeaderComponent {
-  @Input() todoList: TodoList[] = [];
-  @Output() newActiveRemovedEvent = new EventEmitter<TodoList[]>();
+export class HeaderComponent implements OnInit {
+  // @Input() todoList: TodoList[] = [];
+  // @Output() newActiveRemovedEvent = new EventEmitter<TodoList[]>();
+
+  todoList: TodoList[] = [];
 
   activeTodos() {
     return this.todoList.filter(todo => !todo.active);
   }
 
   removeActive() {
-    this.todoList = this.todoList.filter(todo => !todo.active);
-    this.newActiveRemovedEvent.emit(this.todoList);
+    this.todoService.deleteActiveTodo()
+
+  }
+
+  ngOnInit(): void {
+    this.todoService.getTodoList().subscribe(todoList => {
+      this.todoList = todoList;
+    })
+  }
+
+  constructor(private todoService: TodoService) {
   }
 }

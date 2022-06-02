@@ -1,3 +1,13 @@
+.wrapper {
+  width: 600px;
+  margin: 8vh auto 0;
+  padding: 30px;
+  box-sizing: border-box;
+  background: #e3e3e3;
+  border-radius: 25px;
+  box-shadow: 0 0 30px 10px rgba(26, 26, 26, 0.4);
+}
+
 .header, .main__item, .form__add-todo {
   display: flex;
   justify-content: space-between;
@@ -19,17 +29,17 @@
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
 }
 
-.main__item__todo > input[type=checkbox],
-.form__add-todo__input[type=checkbox],
-.main__choose-all > input[type=checkbox]{
-  width:18px;
-  height:18px;
-}
-
 .header__btn:active, .main__btn:active, .form__add-todo__btn:active {
   border: 2px solid #803287;
   background: #803287;
   color: #c1abc5;
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
   transition: .1s;
+}
+
+.main__item__todo > input[type=checkbox],
+.form__add-todo__input[type=checkbox],
+.main__choose-all > input[type=checkbox]{
+  width:18px;
+  height:18px;
 }

@@ -1,3 +1,5 @@
+@import '../todo.component.css';
+
 .form__add-todo {
   padding-top: 30px;
 }
@@ -15,7 +17,6 @@
 
 .form__add-todo__input:hover {
   border: 2px solid #803287;
-
 }
 
 .form__add-todo__input:focus-visible {

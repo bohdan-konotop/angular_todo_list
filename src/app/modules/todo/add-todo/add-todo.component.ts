@@ -5,7 +5,7 @@ import { TodoService } from "../services/todo.service";
 @Component({
   selector: 'app-add-todo',
   templateUrl: './add-todo.component.html',
-  styleUrls: ['./add-todo.component.css', '../styles/base.css']
+  styleUrls: ['./add-todo.component.css']
 })
 export class AddTodoComponent {
   todo: FormGroup;

@@ -1,3 +1,5 @@
+@import '../todo.component.css';
+
 .main__item__todo__text, .main__choose-all__text {
   padding-left: 7px;
   align-self: center;

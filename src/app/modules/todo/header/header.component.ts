@@ -5,12 +5,9 @@ import {TodoList} from "../todo.component";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css', '../styles/base.css']
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  // @Input() todoList: TodoList[] = [];
-  // @Output() newActiveRemovedEvent = new EventEmitter<TodoList[]>();
-
   todoList: TodoList[] = [];
 
   activeTodos() {
@@ -28,6 +25,5 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  constructor(private todoService: TodoService) {
-  }
+  constructor(private todoService: TodoService) {  }
 }

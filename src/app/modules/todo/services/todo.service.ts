@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, from } from "rxjs";
-import { filter, map } from "rxjs/operators";
+import {BehaviorSubject, Observable } from "rxjs";
 
 export interface TodoList {
   text: string,
@@ -35,7 +34,7 @@ export class TodoService {
       todo.active = !allActive;
       return todo;
     });
-    this.todoList.next(activeList)
+    this.todoList.next(activeList);
   }
 
   changeCheckbox(i: number) {
@@ -52,6 +51,5 @@ export class TodoService {
   deleteActiveTodo() {
     const filtered = this.todoList.value.filter(todo => !todo.active);
     this.todoList.next(filtered);
-
   }
 }

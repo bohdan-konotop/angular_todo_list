@@ -1,37 +1,42 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { RouterModule, Routes } from "@angular/router";
+import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
+import { environment } from "../environments/environment";
+import { getAuth, provideAuth } from "@angular/fire/auth";
 
-import { AppComponent } from './app.component';
-import {TodoModule} from "./modules/todo/todo.module";
+import { AppComponent } from "./app.component";
 import { AuthModule } from "./modules/auth/auth.module";
-import {RouterModule} from "@angular/router";
-import {TodoComponent} from "./modules/todo/todo.component";
-import { LogInComponent } from "./modules/auth/log-in/log-in.component";
-import {RegisterComponent} from "./modules/auth/register/register.component";
-import {AuthComponent} from "./modules/auth/auth.component";
 
+const routes: Routes = [
+  {
+    path: "",
+    loadChildren: () =>
+      import("./modules/auth/auth.module").then((m) => m.AuthModule),
+  },
+  {
+    path: "todo",
+    loadChildren: () =>
+      import("./modules/todo/todo.module").then((m) => m.TodoModule),
+  },
+  {
+    path: "**",
+    redirectTo: "",
+    pathMatch: "full",
+  },
+];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    TodoModule,
     AuthModule,
-    RouterModule.forRoot([
-      {path: "**", component: TodoComponent},
-      {
-        path: '',
-        component: AuthComponent,
-        children: [
-          {path: 'log-in', component: LogInComponent},
-          {path: 'register', component: RegisterComponent},
-        ]
-      },
-    ]),
+    RouterModule.forRoot(routes),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
   ],
+  exports: [RouterModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

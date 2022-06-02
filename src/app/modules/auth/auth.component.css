@@ -28,7 +28,18 @@
 .auth__form {
   display: flex;
   flex-direction: column;
+  position: relative;
   padding-top: 30px;
+}
+
+.auth__error {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  top: 5px;
+  margin: 0 auto;
+  color: #873232;
 }
 
 .auth__form__label {

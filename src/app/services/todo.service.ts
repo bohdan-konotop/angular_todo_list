@@ -1,19 +1,14 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable } from "rxjs";
-
-export interface TodoList {
-  text: string,
-  active: boolean,
-}
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { TodoList } from "../interfaces/todo-list.interface";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class TodoService {
-
   private todoList = new BehaviorSubject<TodoList[]>([]);
 
-  private todoList$ = this.todoList.asObservable()
+  private todoList$ = this.todoList.asObservable();
 
   getTodoList(): Observable<TodoList[]> {
     return this.todoList$;
@@ -21,16 +16,17 @@ export class TodoService {
 
   addTodo(todo: string) {
     this.todoList.next([
-        ...this.todoList.value, {
-          text: todo,
-          active: false
-        }
+      ...this.todoList.value,
+      {
+        text: todo,
+        active: false,
+      },
     ]);
   }
 
   allCheckbox(allActive: boolean) {
-    const source = this.todoList.value
-    const activeList = source.map(todo => {
+    const source = this.todoList.value;
+    const activeList = source.map((todo) => {
       todo.active = !allActive;
       return todo;
     });
@@ -49,7 +45,7 @@ export class TodoService {
   }
 
   deleteActiveTodo() {
-    const filtered = this.todoList.value.filter(todo => !todo.active);
+    const filtered = this.todoList.value.filter((todo) => !todo.active);
     this.todoList.next(filtered);
   }
 }

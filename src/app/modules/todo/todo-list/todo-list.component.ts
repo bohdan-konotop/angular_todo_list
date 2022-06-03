@@ -1,14 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { TodoList } from "../../../interfaces/todo-list.interface";
 import { TodoService } from "../../../services/todo.service";
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  selector: "app-todo-list",
+  templateUrl: "./todo-list.component.html",
+  styleUrls: ["./todo-list.component.css"],
 })
-export class MainComponent implements OnInit {
-
+export class TodoListComponent implements OnInit {
   all: boolean = false;
 
   deleteTodo(todoId: number) {
@@ -21,18 +20,17 @@ export class MainComponent implements OnInit {
   }
 
   allCheckbox() {
-    this.todoService.allCheckbox(this.all)
+    this.todoService.allCheckbox(this.all);
     this.all = !this.all;
   }
 
   todoList: TodoList[] = [];
 
-  ngOnInit():void {
-    this.todoService.getTodoList().subscribe(todoList => {
+  ngOnInit(): void {
+    this.todoService.getTodoList().subscribe((todoList) => {
       this.todoList = todoList;
-    })
+    });
   }
 
-  constructor(private todoService: TodoService) {
-  }
+  constructor(private todoService: TodoService) {}
 }

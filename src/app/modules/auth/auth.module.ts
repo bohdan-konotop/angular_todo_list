@@ -6,14 +6,15 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AuthComponent } from "./auth.component";
 import { LogInComponent } from "./log-in/log-in.component";
 import { RegisterComponent } from "./register/register.component";
-import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
-import { environment } from "../../../environments/environment";
-import { getAuth, provideAuth } from "@angular/fire/auth";
 
 const routes: Routes = [
   {
     path: "",
     component: LogInComponent,
+  },
+  {
+    path: "register",
+    component: RegisterComponent,
   },
 ];
 

@@ -13,6 +13,7 @@ import { Router } from "@angular/router";
 })
 export class AuthService {
   isUserExist: boolean = true;
+  isEmailInUse: boolean = false;
 
   login({ email, password }: LoginData) {
     this.isUserExist = true;
@@ -29,11 +30,25 @@ export class AuthService {
   }
 
   register({ email, password }: LoginData) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+    this.isEmailInUse = false;
+    return createUserWithEmailAndPassword(this.auth, email, password)
+      .then(() => this.router.navigate([""]))
+      .catch((e) => {
+        this.isEmailInUse = true;
+        console.error(e);
+      });
+  }
+
+  getIsEmailInUse() {
+    return this.isEmailInUse;
   }
 
   logout() {
-    return signOut(this.auth);
+    return signOut(this.auth)
+      .then(() => this.router.navigate([""]))
+      .catch((e) => {
+        console.error(e);
+      });
   }
   constructor(private auth: Auth, private router: Router) {}
 }

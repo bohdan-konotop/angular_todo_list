@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthService } from "../../../services/auth.service";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.css"],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
+  user: FormGroup;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.user = fb.group({
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(6)]],
+    });
   }
 
+  register(): void {
+    void this.authService.register(this.user.value);
+  }
+
+  getIsEmailInUse() {
+    return this.authService.getIsEmailInUse();
+  }
 }

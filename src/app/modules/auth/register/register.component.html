@@ -7,12 +7,10 @@
 			<div *ngIf="getIsEmailInUse()" class="auth__error">
 				<span>This email is already registered!</span>
 			</div>
-
-			<!--		<label for="nickname" class="auth__form__label">-->
-			<!--			Username:-->
-			<!--		</label>-->
-			<!--		<input type="text" id="nickname" class="auth__form__input">-->
-
+			<label for="username" class="auth__form__label">
+				Username:
+			</label>
+			<input formControlName="username" autocomplete="username" type="text" id="username" class="auth__form__input">
 			<label for="email" class="auth__form__label">
 				Email:
 			</label>

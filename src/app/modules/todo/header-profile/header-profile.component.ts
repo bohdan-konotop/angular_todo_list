@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { AuthService } from "../../../services/auth.service";
+import { DatabaseService } from "../../../services/database.service";
 
 @Component({
   selector: "app-header-profile",
@@ -7,9 +8,16 @@ import { AuthService } from "../../../services/auth.service";
   styleUrls: ["./header-profile.component.css"],
 })
 export class HeaderProfileComponent {
-  constructor(private authService: AuthService) {}
+  user = this.db.getUserName();
+  constructor(private authService: AuthService, private db: DatabaseService) {}
 
   logout(): void {
     void this.authService.logout();
+  }
+
+  deleteAccount() {
+    this.db.deleteUserData().catch(console.error);
+    this.authService.deletteUser();
+    this.authService.logout().catch(console.error);
   }
 }

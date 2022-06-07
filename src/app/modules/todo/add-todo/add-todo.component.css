@@ -1,7 +1,12 @@
 @import '../todo.component.css';
 
+.add-todo {
+  display: flex;
+  flex-direction: column;
+}
+
 .form__add-todo {
-  padding-top: 30px;
+  padding: 30px 0 10px 0;
 }
 
 .form__add-todo__input {
@@ -38,4 +43,20 @@
 .form__add-todo__input::placeholder {
   color: #c1abc5;
   font-size: 14px;
+}
+
+.save__todo {
+  position: absolute;
+  cursor: pointer;
+  color: #a64444;
+  align-self: flex-end;
+  bottom: 10px;
+}
+
+.save__todo:hover {
+  text-decoration: underline;
+}
+
+.save__todo:active {
+  color: #803287;
 }

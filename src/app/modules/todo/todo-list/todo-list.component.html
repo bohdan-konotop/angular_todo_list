@@ -1,4 +1,4 @@
-<main *ngIf="todoList.length > 0" class="main">
+<main *ngIf="todoList?.length || 0 > 0" class="main">
 	<div class="main__choose-all">
 		<input type="checkbox" (change)="allCheckbox()" [checked]="all">
 		<span class="main__choose-all__text">All</span>

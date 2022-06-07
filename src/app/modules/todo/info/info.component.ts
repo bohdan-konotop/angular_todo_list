@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { TodoService } from "../../../services/todo.service";
 import { TodoList } from "../../../interfaces/todo-list.interface";
 
@@ -11,7 +11,8 @@ export class InfoComponent implements OnInit {
   todoList: TodoList[] = [];
 
   activeTodos() {
-    return this.todoList.filter((todo) => !todo.active);
+    if (this.todoList) return this.todoList.filter((todo) => !todo.active);
+    return;
   }
 
   removeActive() {

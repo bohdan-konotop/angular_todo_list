@@ -14,9 +14,13 @@ export class TodoService {
     return this.todoList$;
   }
 
+  getUserTodo(todoList: any) {
+    this.todoList.next(todoList);
+  }
+
   addTodo(todo: string) {
     this.todoList.next([
-      ...this.todoList.value,
+      ...(this.todoList?.value || []),
       {
         text: todo,
         active: false,
@@ -48,4 +52,6 @@ export class TodoService {
     const filtered = this.todoList.value.filter((todo) => !todo.active);
     this.todoList.next(filtered);
   }
+
+  constructor() {}
 }

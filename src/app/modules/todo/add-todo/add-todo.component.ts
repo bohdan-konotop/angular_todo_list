@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter } from "@angular/core";
+import { Component } from "@angular/core";
 import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 import { TodoService } from "../../../services/todo.service";
+import { DatabaseService } from "../../../services/database.service";
 
 @Component({
   selector: "app-add-todo",
@@ -10,7 +11,11 @@ import { TodoService } from "../../../services/todo.service";
 export class AddTodoComponent {
   todo: FormGroup;
 
-  constructor(private fb: FormBuilder, private todoService: TodoService) {
+  constructor(
+    private fb: FormBuilder,
+    private todoService: TodoService,
+    private db: DatabaseService
+  ) {
     this.todo = fb.group({
       text: [
         null,
@@ -23,11 +28,13 @@ export class AddTodoComponent {
     });
   }
 
-  @Output() newTodoEvent = new EventEmitter<string>();
-
   onSubmit() {
     if (this.todo.value.text === null) return;
     this.todoService.addTodo(this.todo.value.text);
     this.todo.reset();
+  }
+
+  saveTodo() {
+    this.db.saveTodo(this.todoService.getTodoList());
   }
 }

@@ -1,4 +1,7 @@
 <header class="header">
-	<div class="header__info">Hi, --UserName-- (in procces :D)</div>
-	<button (click)="logout()" class="header__logout-btn">Logout</button>
+	<div class="header__info">Hi, {{user | async}}</div>
+	<div>
+		<button (click)="deleteAccount()" class="header__delete-account-btn">Delete profile</button>
+		<button (click)="logout()" class="header__logout-btn">Logout</button>
+	</div>
 </header>

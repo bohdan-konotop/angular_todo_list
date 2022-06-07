@@ -15,7 +15,7 @@
   font-size: 16px;
 }
 
-.header__logout-btn {
+.header__logout-btn, .header__delete-account-btn {
   background: transparent;
   border: 2px solid #fff;
   color: #fff;
@@ -25,9 +25,21 @@
   transition: .2s;
 }
 
+.header__delete-account-btn {
+  border: 2px solid #a64444;
+  color: #a64444;
+  margin-right: 15px;
+}
+
 .header__logout-btn:hover {
   border: 2px solid #f563ff;
   color: #f563ff;
+  box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.2);
+}
+
+.header__delete-account-btn:hover {
+  border: 2px solid #d36f6f;
+  color: #d36f6f;
   box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.2);
 }
 
@@ -35,6 +47,10 @@
   border: 2px solid #803287;
   background: #803287;
   color: #c1abc5;
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
-  transition: .1s;
+}
+
+.header__delete-account-btn:active {
+  border: 2px solid #d36f6f;
+  color: #fff;
+  background: #d36f6f;
 }

@@ -7,6 +7,7 @@ import {
 } from "@angular/fire/auth";
 import { LoginData } from "../interfaces/login-data.interface";
 import { Router } from "@angular/router";
+import { DatabaseService } from "./database.service";
 
 @Injectable({
   providedIn: "root",
@@ -29,9 +30,12 @@ export class AuthService {
     return this.isUserExist;
   }
 
-  register({ email, password }: LoginData) {
+  register({ username, email, password }: LoginData) {
     this.isEmailInUse = false;
     return createUserWithEmailAndPassword(this.auth, email, password)
+      .then((callback) => {
+        this.db.addUser(callback.user.uid, username);
+      })
       .then(() => this.router.navigate([""]))
       .catch((e) => {
         this.isEmailInUse = true;
@@ -43,6 +47,10 @@ export class AuthService {
     return this.isEmailInUse;
   }
 
+  deletteUser() {
+    this.auth.currentUser?.delete();
+  }
+
   logout() {
     return signOut(this.auth)
       .then(() => this.router.navigate([""]))
@@ -50,5 +58,9 @@ export class AuthService {
         console.error(e);
       });
   }
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(
+    private auth: Auth,
+    private router: Router,
+    private db: DatabaseService
+  ) {}
 }

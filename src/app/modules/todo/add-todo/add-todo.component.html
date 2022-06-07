@@ -1,5 +1,8 @@
-<form [formGroup]="todo" (ngSubmit)="onSubmit()" class="form__add-todo">
-	<input formControlName="text" id="todo" type="text" name="todo"
-				 class="form__add-todo__input" placeholder="Add Todo.." (submit)="todo.invalid">
-	<button (click)="onSubmit()" [disabled]="todo.invalid" type="button" class="form__add-todo__btn">Add</button>
-</form>
+<div class="add-todo">
+	<form [formGroup]="todo" (ngSubmit)="onSubmit()" class="form__add-todo">
+		<input formControlName="text" id="todo" type="text" name="todo"
+					 class="form__add-todo__input" placeholder="Add Todo.." (submit)="todo.invalid">
+		<button (click)="onSubmit()" [disabled]="todo.invalid" type="button" class="form__add-todo__btn">Add</button>
+	</form>
+	<a (click)="saveTodo()" class="save__todo">Save todo</a>
+</div>

@@ -12,6 +12,7 @@ import {
   redirectLoggedInTo,
   redirectUnauthorizedTo,
 } from "@angular/fire/auth-guard";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo("");
 const redirectLoggedInToHome = () => redirectLoggedInTo("todo");
@@ -44,6 +45,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    BrowserAnimationsModule,
   ],
   exports: [RouterModule],
   bootstrap: [AppComponent],

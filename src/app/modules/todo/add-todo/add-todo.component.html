@@ -4,5 +4,8 @@
 					 class="form__add-todo__input" placeholder="Add Todo.." (submit)="todo.invalid">
 		<button (click)="onSubmit()" [disabled]="todo.invalid" type="button" class="form__add-todo__btn">Add</button>
 	</form>
-	<a (click)="saveTodo()" class="save__todo">Save todo</a>
+	<div class="save">
+		<a *ngIf="(backupSave?.length || 0) > 0" (click)="undo()" class="undo__save">Undo</a>
+		<a (click)="saveTodo()" class="save__todo">Save todo</a>
+	</div>
 </div>

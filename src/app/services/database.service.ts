@@ -37,10 +37,10 @@ export class DatabaseService {
   saveTodo(todoList: any) {
     const db = getDatabase();
     return update(ref(db, `users/${this.getUserId()}`), {
-      todoList: todoList.source.value,
+      todoList: todoList?.source?.value || todoList,
     })
       .then(() => {
-        alert("Saved successfuly");
+        alert("Success");
       })
       .catch((e) => {
         console.error(e);

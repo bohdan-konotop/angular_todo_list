@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 import { TodoService } from "../../../services/todo.service";
 import { DatabaseService } from "../../../services/database.service";
+import { TodoList } from "../../../interfaces/todo-list.interface";
 
 @Component({
   selector: "app-add-todo",
@@ -34,7 +35,16 @@ export class AddTodoComponent {
     this.todo.reset();
   }
 
+  backupSave: TodoList[] = [];
+
   saveTodo() {
-    this.db.saveTodo(this.todoService.getTodoList());
+    this.db.getUserTodo().subscribe((todoList) => {
+      this.backupSave = todoList.val();
+    });
+    this.db.saveTodo(this.todoService.getTodoList()).catch(console.error);
+  }
+
+  undo() {
+    this.db.saveTodo(this.backupSave).catch(console.error);
   }
 }

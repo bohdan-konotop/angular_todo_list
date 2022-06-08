@@ -45,18 +45,31 @@
   font-size: 14px;
 }
 
-.save__todo {
+.save {
   position: absolute;
-  cursor: pointer;
-  color: #a64444;
   align-self: flex-end;
   bottom: 10px;
 }
 
-.save__todo:hover {
+
+.save__todo, .undo__save {
+  cursor: pointer;
+  color: #a64444;
+}
+
+.save__todo:hover, .undo__save:hover {
   text-decoration: underline;
 }
 
 .save__todo:active {
   color: #803287;
+}
+
+.undo__save {
+  color: #803287;
+  margin-right: 15px;
+}
+
+.undo__save:active {
+  color: #a64444;
 }

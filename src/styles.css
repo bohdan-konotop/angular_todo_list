@@ -5,3 +5,5 @@ body {
   background: linear-gradient(90deg, rgba(134,93,252,1) 0%, rgba(147,23,109,1) 100%);
   margin: 0;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

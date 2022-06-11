@@ -17,6 +17,10 @@
   padding-top: 20px;
 }
 
+.main__chb {
+  font-size: 16px;
+}
+
 .main__item__todo {
   display: flex
 }

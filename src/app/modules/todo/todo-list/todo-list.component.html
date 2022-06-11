@@ -1,13 +1,15 @@
 <main *ngIf="todoList?.length || 0 > 0" class="main">
 	<div class="main__choose-all">
-		<input type="checkbox" (change)="allCheckbox()" [checked]="all">
-		<span class="main__choose-all__text">All</span>
+		<mat-checkbox color="warn" (change)="allCheckbox($event.checked)" [indeterminate]="someComplete()" [checked]="allComplete">
+			All
+		</mat-checkbox>
 	</div>
 	<div *ngFor="let item of todoList; index as i" class="main__item">
 		<div class="main__item__todo">
-			<input type="checkbox" [checked]="item.active" (change)="changeCheckbox(i)">
-			<span [ngClass]="{'todo__completed-text': item.active}" class="main__item__todo__text">{{item.text}}</span>
+			<mat-checkbox color="accent" [checked]="item.active" (change)="changeCheckbox(i)" [ngClass]="{'todo__completed-text': item.active}" class="main__chb">
+				{{item.text}}
+			</mat-checkbox>
 		</div>
-		<button (click)="deleteTodo(i)" class="main__btn">Delete</button>
+		<button mat-mini-fab color="accent" (click)="deleteTodo(i)" ><mat-icon>delete</mat-icon></button>
 	</div>
 </main>

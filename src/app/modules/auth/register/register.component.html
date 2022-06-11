@@ -1,26 +1,62 @@
 <div class="wrapper">
 	<div class="auth__header">
-		<h2>Registration</h2>
-		<a routerLink="/log-in" class="auth__header__link">Sign in</a>
+		<h2 class="auth__header-title">Registration</h2>
+		<a mat-button color="warn" routerLink="/log-in" class="auth__header__link"
+		>Sign in</a
+		>
 	</div>
-		<form [formGroup]="user" class="auth__form">
-			<div *ngIf="getIsEmailInUse()" class="auth__error">
-				<span>This email is already registered!</span>
-			</div>
-			<label for="username" class="auth__form__label">
-				Username:
-			</label>
-			<input formControlName="username" autocomplete="username" type="text" id="username" class="auth__form__input">
-			<label for="email" class="auth__form__label">
-				Email:
-			</label>
-			<input formControlName="email" autocomplete="email" type="text" id="email" class="auth__form__input">
-
-			<label for="password" class="auth__form__label">
-				Password
-			</label>
-			<input formControlName="password" autocomplete="current-password" type="password" id="password" class="auth__form__input">
-
-			<button (click)="register()" [disabled]="user.invalid" type="button" class="auth__form__btn">Register</button>
-		</form>
+	<form [formGroup]="user" class="auth__form">
+		<div *ngIf="getIsEmailInUse()" class="auth__error">
+			<span>This email is already registered!</span>
+		</div>
+		<mat-form-field appearance="outline">
+			<input
+					matInput
+					formControlName="username"
+					autocomplete="username"
+					placeholder="Username"
+					type="text"
+					id="username"
+					(keyup.enter)="email.focus()"
+			/>
+			<mat-icon matSuffix>account_circle</mat-icon>
+		</mat-form-field>
+		<mat-form-field appearance="outline">
+			<input
+					matInput
+          #email
+					formControlName="email"
+					placeholder="Email"
+					autocomplete="email"
+					type="email"
+					id="email"
+					(keyup.enter)="password.focus()"
+			/>
+			<mat-icon matSuffix>mail</mat-icon>
+		</mat-form-field>
+		<mat-form-field appearance="outline">
+			<input
+					matInput
+          #password
+					formControlName="password"
+					placeholder="Password"
+					autocomplete="password"
+					[type]="hide ? 'password' : 'text'"
+					id="password"
+					(keyup.enter)="register()"
+			/>
+			<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+							[attr.aria-pressed]="hide">
+				<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+			</button>
+		</mat-form-field>
+		<button
+				mat-stroked-button
+				(click)="register()"
+				[disabled]="user.invalid"
+				type="button"
+		>
+			Register
+		</button>
+	</form>
 </div>

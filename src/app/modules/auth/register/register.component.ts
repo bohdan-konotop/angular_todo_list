@@ -10,6 +10,8 @@ import { AuthService } from "../../../services/auth.service";
 export class RegisterComponent {
   user: FormGroup;
 
+  hide: boolean = true;
+
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.user = fb.group({
       username: ["", [Validators.required, Validators.minLength(2)]],
@@ -19,6 +21,7 @@ export class RegisterComponent {
   }
 
   register(): void {
+    if (this.user.invalid) return;
     void this.authService.register(this.user.value);
   }
 

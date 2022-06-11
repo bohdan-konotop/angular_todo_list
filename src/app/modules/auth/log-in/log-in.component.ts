@@ -10,6 +10,8 @@ import { AuthService } from "../../../services/auth.service";
 export class LogInComponent {
   user: FormGroup;
 
+  hide: boolean = true;
+
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.user = fb.group({
       email: ["", [Validators.required, Validators.email]],
@@ -18,6 +20,7 @@ export class LogInComponent {
   }
 
   login(): void {
+    if (this.user.invalid) return;
     void this.authService.login(this.user.value);
   }
 

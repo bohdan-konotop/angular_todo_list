@@ -1,9 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
-
 body {
-  font-family: 'Lato', sans-serif;
-  background: linear-gradient(90deg, rgba(134,93,252,1) 0%, rgba(147,23,109,1) 100%);
   margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(90deg, rgb(255 104 89) 0%, rgb(253 82 137) 100%);
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

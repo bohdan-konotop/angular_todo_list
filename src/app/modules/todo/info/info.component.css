@@ -4,6 +4,11 @@
   border-bottom: 2px solid #c1abc5;
 }
 
+.header__title {
+  font-size: 24px;
+}
+
 .header__active-count {
-  color: #803287;
+  color: #ec4d80;
+  font-size: 15px;
 }

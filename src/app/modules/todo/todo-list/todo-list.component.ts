@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+
 import { TodoList } from "../../../interfaces/todo-list.interface";
 import { TodoService } from "../../../services/todo.service";
-import { DatabaseService } from "../../../services/database.service";
 
 @Component({
   selector: "app-todo-list",
@@ -9,20 +9,32 @@ import { DatabaseService } from "../../../services/database.service";
   styleUrls: ["./todo-list.component.css"],
 })
 export class TodoListComponent implements OnInit {
-  all: boolean = false;
-
   deleteTodo(todoId: number) {
     this.todoService.deleteTodo(todoId);
   }
 
   changeCheckbox(i: number) {
     this.todoService.changeCheckbox(i);
-    this.all = false;
+    this.updateAllComplete();
   }
 
-  allCheckbox() {
-    this.todoService.allCheckbox(this.all);
-    this.all = !this.all;
+  allCheckbox(checked: boolean) {
+    this.todoService.allCheckbox(checked);
+  }
+
+  allComplete: boolean = false;
+
+  updateAllComplete() {
+    this.allComplete = this.todoList.every((item) => item.active);
+  }
+
+  someComplete() {
+    const todoFiltered = this.todoList?.filter((todo) => todo.active) || false;
+    return !(
+      this.todoList &&
+      (todoFiltered.length === this.todoList.length ||
+        todoFiltered.length === 0)
+    );
   }
 
   todoList: TodoList[] = [];

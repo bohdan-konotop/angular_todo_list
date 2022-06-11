@@ -6,43 +6,13 @@
 }
 
 .form__add-todo {
+  display: block;
   padding: 30px 0 10px 0;
 }
 
-.form__add-todo__input {
-  width: 100%;
-  height: 35px;
-  margin-right: 15px;
-  background: transparent;
-  outline: none;
-  border-radius: 25px;
-  border: 2px solid #000;
-  transition: .2s;
-}
-
-.form__add-todo__input:hover {
-  border: 2px solid #803287;
-}
-
-.form__add-todo__input:focus-visible {
-  border: 2px solid #803287;
-  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
-}
-
-.form__add-todo__input[type=text] {
-  font-size: 18px;
-  padding-left: 15px;
-  color: #c1abc5;
-}
-
-.form__add-todo__input[type=text]:focus-visible {
-  font-size: 18px;
-  color: #803287;
-}
-
-.form__add-todo__input::placeholder {
-  color: #c1abc5;
-  font-size: 14px;
+.form__add-todo__wrapper {
+  display: flex;
+  justify-content: space-between
 }
 
 .save {
@@ -66,10 +36,23 @@
 }
 
 .undo__save {
-  color: #803287;
+  color: #ed4635;
   margin-right: 15px;
 }
 
 .undo__save:active {
   color: #a64444;
 }
+
+/deep/ .form__add-todo .mat-form-field-infix {
+  border: 0;
+}
+
+/deep/ .form__add-todo__wrapper .form__add-todo__input {
+  margin: 0;
+}
+
+/deep/ .form__add-todo .mat-form-field-wrapper .mat-form-field-outline {
+  top: 0;
+}
+

@@ -1,13 +1,18 @@
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
-
 import { CommonModule } from "@angular/common";
+import { ReactiveFormsModule } from "@angular/forms";
+import { RouterModule, Routes } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+
 import { InfoComponent } from "./info/info.component";
 import { TodoListComponent } from "./todo-list/todo-list.component";
 import { AddTodoComponent } from "./add-todo/add-todo.component";
 import { TodoComponent } from "./todo.component";
-import { RouterModule, Routes } from "@angular/router";
-import { HeaderProfileComponent } from './header-profile/header-profile.component';
+import { HeaderProfileComponent } from "./header-profile/header-profile.component";
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 const routes: Routes = [
   {
@@ -17,7 +22,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+  ],
   declarations: [
     TodoComponent,
     InfoComponent,

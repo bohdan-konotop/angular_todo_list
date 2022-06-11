@@ -28,10 +28,10 @@ export class TodoService {
     ]);
   }
 
-  allCheckbox(allActive: boolean) {
+  allCheckbox(checked: boolean) {
     const source = this.todoList.value;
     const activeList = source.map((todo) => {
-      todo.active = !allActive;
+      todo.active = checked;
       return todo;
     });
     this.todoList.next(activeList);

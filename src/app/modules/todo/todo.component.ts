@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { TodoList } from "../../interfaces/todo-list.interface";
 import { DatabaseService } from "../../services/database.service";
 import { TodoService } from "../../services/todo.service";
@@ -9,26 +9,7 @@ import { TodoService } from "../../services/todo.service";
   styleUrls: ["./todo.component.css"],
 })
 export class TodoComponent implements OnInit {
-  @Input() todo = "";
-  @Output() newListEvent = new EventEmitter<TodoList[]>();
-
   todoList: TodoList[] = [];
-
-  addTodo(event: string) {
-    this.todoList.push({
-      text: event,
-      active: false,
-    });
-    this.newListEvent.emit(this.todoList);
-  }
-
-  deleteTodo(event: TodoList[]) {
-    this.todoList = event;
-  }
-
-  deleteActive(event: TodoList[]) {
-    this.todoList = event;
-  }
 
   constructor(private db: DatabaseService, private todoService: TodoService) {}
 

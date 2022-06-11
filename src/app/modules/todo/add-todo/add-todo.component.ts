@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Validators, FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TodoService } from "../../../services/todo.service";
 import { DatabaseService } from "../../../services/database.service";
 import { TodoList } from "../../../interfaces/todo-list.interface";
@@ -23,16 +23,17 @@ export class AddTodoComponent {
         [
           Validators.required,
           Validators.minLength(1),
-          Validators.maxLength(65),
+          Validators.maxLength(54),
         ],
       ],
     });
   }
 
   onSubmit() {
-    if (this.todo.value.text === null) return;
+    if (!this.todo.valid) return;
     this.todoService.addTodo(this.todo.value.text);
     this.todo.reset();
+    this.scrollToBottom();
   }
 
   backupSave: TodoList[] = [];
@@ -46,5 +47,14 @@ export class AddTodoComponent {
 
   undo() {
     this.db.saveTodo(this.backupSave).catch(console.error);
+    this.backupSave = [];
+  }
+
+  scrollToBottom() {
+    window.scroll({
+      top: document.body.scrollHeight,
+      left: 0,
+      behavior: "smooth",
+    });
   }
 }

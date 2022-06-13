@@ -37,10 +37,10 @@
   color: #873232;
 }
 
-/deep/ .mat-form-field-infix {
+:host /deep/ .mat-form-field-infix {
   border: 0;
 }
 
-/deep/ .auth__form .mat-form-field-wrapper .mat-form-field-outline {
+:host /deep/ .auth__form .mat-form-field-wrapper .mat-form-field-outline {
   top: 0;
 }

@@ -27,4 +27,9 @@ export class LogInComponent {
   getUserExistance() {
     return this.authService.getUserExistance();
   }
+
+  changeHide(event: Event): void {
+    event.preventDefault();
+    this.hide = !this.hide;
+  }
 }

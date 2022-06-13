@@ -1,47 +1,48 @@
 <div class="wrapper">
-	<div class="auth__header">
-		<h2 class="auth__header-title">Sign in</h2>
-		<a mat-button color="warn" routerLink="/register">Registration</a>
-	</div>
-	<form [formGroup]="user" (ngSubmit)="login()" class="auth__form">
-		<div *ngIf="!getUserExistance()" class="auth__error">
-			<span>Wrong email address or password!</span>
-		</div>
-		<mat-form-field appearance="outline">
-			<input
-					matInput
-					formControlName="email"
-					placeholder="Email"
-					autocomplete="email"
-					type="email"
-					id="email"
-					(keyup.enter)="password.focus()"
-			/>
-			<mat-icon matSuffix>mail</mat-icon>
-		</mat-form-field>
-		<mat-form-field appearance="outline">
-			<input
+  <div class="auth__header">
+    <h2 class="auth__header-title">Sign in</h2>
+    <a mat-button color="warn" routerLink="/register">Registration</a>
+  </div>
+  <form [formGroup]="user" (ngSubmit)="login()" class="auth__form">
+    <div *ngIf="!getUserExistance()" class="auth__error">
+      <span>Wrong email address or password!</span>
+    </div>
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        formControlName="email"
+        placeholder="Email"
+        autocomplete="email"
+        type="email"
+        id="email"
+        (keyup.enter)="password.focus()"
+      />
+      <mat-icon matSuffix>mail</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input
         #password
-				matNativeControl
-				formControlName="password"
-				placeholder="Password"
-				autocomplete="password"
-				[type]="hide ? 'password' : 'text'"
-				id="password"
-				(keyup.enter)="login()"
-			/>
-			<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-							[attr.aria-pressed]="hide">
-				<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-			</button>
-		</mat-form-field>
-		<button
-				mat-stroked-button
-				(click)="login()"
-				[disabled]="user.invalid"
-				type="button"
-		>
-			Login
-		</button>
-	</form>
+        matNativeControl
+        formControlName="password"
+        placeholder="Password"
+        autocomplete="password"
+        [type]="hide ? 'password' : 'text'"
+        id="password"
+        (keyup.enter)="login()"
+      />
+      <button mat-icon-button matSuffix (click)="changeHide($event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button
+      mat-stroked-button
+      (click)="login()"
+      [disabled]="user.invalid"
+      type="button"
+    >
+      Login
+    </button>
+  </form>
 </div>

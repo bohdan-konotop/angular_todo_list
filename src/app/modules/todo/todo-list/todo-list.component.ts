@@ -18,8 +18,8 @@ export class TodoListComponent implements OnInit {
     this.updateAllComplete();
   }
 
-  allCheckbox(checked: boolean) {
-    this.todoService.allCheckbox(checked);
+  allChecked(checked: boolean) {
+    this.todoService.allChecked(checked);
   }
 
   allComplete: boolean = false;
@@ -30,6 +30,8 @@ export class TodoListComponent implements OnInit {
 
   someComplete() {
     const todoFiltered = this.todoList?.filter((todo) => todo.active) || false;
+    console.log(todoFiltered);
+
     return !(
       this.todoList &&
       (todoFiltered.length === this.todoList.length ||
@@ -40,9 +42,13 @@ export class TodoListComponent implements OnInit {
   todoList: TodoList[] = [];
 
   ngOnInit(): void {
-    this.todoService.getTodoList().subscribe((todoList) => {
+    this.todoService.getTodoListObservable().subscribe((todoList) => {
       this.todoList = todoList;
     });
+  }
+
+  trackByFn(index: number) {
+    return index;
   }
 
   constructor(private todoService: TodoService) {}

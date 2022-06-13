@@ -44,15 +44,15 @@
   color: #a64444;
 }
 
-/deep/ .form__add-todo .mat-form-field-infix {
+:host /deep/ .form__add-todo .mat-form-field-infix {
   border: 0;
 }
 
-/deep/ .form__add-todo__wrapper .form__add-todo__input {
+:host /deep/ .form__add-todo__wrapper .form__add-todo__input {
   margin: 0;
 }
 
-/deep/ .form__add-todo .mat-form-field-wrapper .mat-form-field-outline {
+:host /deep/ .form__add-todo .mat-form-field-wrapper .mat-form-field-outline {
   top: 0;
 }
 

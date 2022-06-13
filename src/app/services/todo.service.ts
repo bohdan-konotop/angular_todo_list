@@ -10,11 +10,15 @@ export class TodoService {
 
   private todoList$ = this.todoList.asObservable();
 
-  getTodoList(): Observable<TodoList[]> {
+  getTodoListObservable(): Observable<TodoList[]> {
     return this.todoList$;
   }
 
-  getUserTodo(todoList: any) {
+  getTodoList() {
+    return this.todoList.value;
+  }
+
+  getUserTodo(todoList: TodoList[]) {
     this.todoList.next(todoList);
   }
 
@@ -28,7 +32,7 @@ export class TodoService {
     ]);
   }
 
-  allCheckbox(checked: boolean) {
+  allChecked(checked: boolean) {
     const source = this.todoList.value;
     const activeList = source.map((todo) => {
       todo.active = checked;

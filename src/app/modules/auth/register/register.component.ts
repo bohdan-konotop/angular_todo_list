@@ -28,4 +28,9 @@ export class RegisterComponent {
   getIsEmailInUse() {
     return this.authService.getIsEmailInUse();
   }
+  
+  changeHide(event: Event): void {
+    event.preventDefault();
+    this.hide = !this.hide;
+  }
 }

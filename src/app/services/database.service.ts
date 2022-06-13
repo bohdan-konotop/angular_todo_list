@@ -1,20 +1,24 @@
 import { Injectable } from "@angular/core";
 import {
   child,
+  get,
   getDatabase,
   ref,
-  set,
-  get,
-  update,
   remove,
+  set,
+  update,
 } from "@angular/fire/database";
 import { getAuth } from "@angular/fire/auth";
 import { from, map, Observable } from "rxjs";
+import { TodoService } from "./todo.service";
+import { TodoList } from "../interfaces/todo-list.interface";
 
 @Injectable({
   providedIn: "root",
 })
 export class DatabaseService {
+  constructor(public todoService: TodoService) {}
+
   addUser(userId: string, username: string) {
     const db = getDatabase();
     set(ref(db, "users/" + userId), {
@@ -34,10 +38,10 @@ export class DatabaseService {
     );
   }
 
-  saveTodo(todoList: any) {
+  saveTodo(todoList: TodoList[] | null = null) {
     const db = getDatabase();
     return update(ref(db, `users/${this.getUserId()}`), {
-      todoList: todoList?.source?.value || todoList,
+      todoList: todoList ? todoList : this.todoService.getTodoList(),
     })
       .then(() => {
         alert("Success");
@@ -57,5 +61,4 @@ export class DatabaseService {
     const db = getDatabase();
     return remove(ref(db, `users/${this.getUserId()}`)).catch(console.error);
   }
-  constructor() {}
 }

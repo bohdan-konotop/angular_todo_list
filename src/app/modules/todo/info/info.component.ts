@@ -20,7 +20,7 @@ export class InfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.todoService.getTodoList().subscribe((todoList) => {
+    this.todoService.getTodoListObservable().subscribe((todoList) => {
       this.todoList = todoList;
     });
   }

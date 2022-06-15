@@ -8,28 +8,46 @@ import { AuthService } from "../../../services/auth.service";
   styleUrls: ["./log-in.component.css"],
 })
 export class LogInComponent {
-  user: FormGroup;
+  form: FormGroup;
 
   hide: boolean = true;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.user = fb.group({
-      email: ["", [Validators.required, Validators.email]],
+    this.form = fb.group({
+      email: [
+        "",
+        [Validators.required, Validators.email, Validators.minLength(1)],
+      ],
       password: ["", [Validators.required, Validators.minLength(6)]],
     });
   }
 
+  nextFocus(focusItem: HTMLInputElement, event: Event) {
+    focusItem.focus();
+    event.preventDefault();
+    return;
+  }
+
   login(): void {
-    if (this.user.invalid) return;
-    void this.authService.login(this.user.value);
+    if (this.form.invalid) return;
+    void this.authService.login(this.form.value);
   }
 
   getUserExistance() {
     return this.authService.getUserExistance();
   }
 
-  changeHide(event: Event): void {
-    event.preventDefault();
-    this.hide = !this.hide;
-  }
+  //
+  //   message: string = "";
+  //
+  //   errorMessage() {
+  //     const value = this.user.value.email || 0;
+  //     const emailRegular = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+  //
+  //     if (value < 1) {
+  //       this.message = "This field shoud be filled";
+  //     } else if (!emailRegular.test(value)) {
+  //       this.message = "Not a valid email";
+  //     } else this.message = "";
+  //   }
 }

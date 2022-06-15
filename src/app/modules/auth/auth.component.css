@@ -27,6 +27,25 @@
   padding-top: 30px;
 }
 
+.auth__form-field {
+  width: 100%;
+  padding-bottom: 15px;
+}
+
+.auth__input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.auth__validation-error {
+  position: absolute;
+  bottom: 12px;
+  left: 15px;
+  color: #f44336;
+}
+
 .auth__error {
   display: flex;
   justify-content: center;

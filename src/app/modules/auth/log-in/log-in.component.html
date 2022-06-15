@@ -3,43 +3,79 @@
     <h2 class="auth__header-title">Sign in</h2>
     <a mat-button color="warn" routerLink="/register">Registration</a>
   </div>
-  <form [formGroup]="user" (ngSubmit)="login()" class="auth__form">
+  <form [formGroup]="form" (ngSubmit)="login()" class="auth__form">
     <div *ngIf="!getUserExistance()" class="auth__error">
       <span>Wrong email address or password!</span>
     </div>
-    <mat-form-field appearance="outline">
-      <input
-        matInput
-        formControlName="email"
-        placeholder="Email"
-        autocomplete="email"
-        type="email"
-        id="email"
-        (keyup.enter)="password.focus()"
-      />
-      <mat-icon matSuffix>mail</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <input
-        #password
-        matNativeControl
-        formControlName="password"
-        placeholder="Password"
-        autocomplete="password"
-        [type]="hide ? 'password' : 'text'"
-        id="password"
-        (keyup.enter)="login()"
-      />
-      <button mat-icon-button matSuffix (click)="changeHide($event)"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
+    <div class="auth__input">
+      <mat-form-field class="auth__form-field" appearance="outline">
+        <input
+          matInput
+          formControlName="email"
+          placeholder="Email"
+          autocomplete="email"
+          type="email"
+          id="email"
+          (keyup.enter)="nextFocus(password, $event)"
+        />
+        <mat-icon matSuffix>mail</mat-icon>
+      </mat-form-field>
+      <span
+        *ngIf="
+        !form.get('email')?.valid &&
+        (form.get('email')?.touched || form.get('email')?.dirty)
+      "
+        class="auth__validation-error"
+      >
+      {{
+        form.get('email')?.hasError('required')
+          ? 'Email field should be filled'
+          : form.get('email')?.getError('email') ? 'Email address is incorrect ' : ''
+        }}
+      </span>
+    </div>
+    <div class="auth__input">
+      <mat-form-field class="auth__form-field" appearance="outline">
+        <input
+          #password
+          matNativeControl
+          formControlName="password"
+          placeholder="Password"
+          autocomplete="password"
+          [type]="hide ? 'password' : 'text'"
+          id="password"
+          (keyup.enter)="login()"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+          type="button"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <span
+        *ngIf="
+        !form.get('password')?.valid &&
+        (form.get('password')?.touched || form.get('password')?.dirty)
+      "
+        class="auth__validation-error"
+      >
+      {{
+        form.get('password')?.hasError('required')
+          ? 'Please fill the password field'
+          : !form.get('password')?.getError('password') ? 'Password should have at least 6 symbols' : ''
+        }}
+      </span>
+    </div>
+
     <button
       mat-stroked-button
       (click)="login()"
-      [disabled]="user.invalid"
+      [disabled]="form.invalid"
       type="button"
     >
       Login

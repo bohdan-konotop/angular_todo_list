@@ -10,6 +10,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
+import { AuthValidatorComponent } from './auth-validator/auth-validator.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AuthComponent, LogInComponent, RegisterComponent],
+  declarations: [AuthComponent, LogInComponent, RegisterComponent, AuthValidatorComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

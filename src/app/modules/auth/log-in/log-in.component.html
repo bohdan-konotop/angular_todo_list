@@ -20,19 +20,7 @@
         />
         <mat-icon matSuffix>mail</mat-icon>
       </mat-form-field>
-      <span
-        *ngIf="
-        !form.get('email')?.valid &&
-        (form.get('email')?.touched || form.get('email')?.dirty)
-      "
-        class="auth__validation-error"
-      >
-      {{
-        form.get('email')?.hasError('required')
-          ? 'Email field should be filled'
-          : form.get('email')?.getError('email') ? 'Email address is incorrect ' : ''
-        }}
-      </span>
+      <app-auth-validator [control]="form.get('email')"></app-auth-validator>
     </div>
     <div class="auth__input">
       <mat-form-field class="auth__form-field" appearance="outline">
@@ -57,26 +45,12 @@
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
       </mat-form-field>
-      <span
-        *ngIf="
-        !form.get('password')?.valid &&
-        (form.get('password')?.touched || form.get('password')?.dirty)
-      "
-        class="auth__validation-error"
-      >
-      {{
-        form.get('password')?.hasError('required')
-          ? 'Please fill the password field'
-          : !form.get('password')?.getError('password') ? 'Password should have at least 6 symbols' : ''
-        }}
-      </span>
+      <app-auth-validator [control]="form.get('password')"></app-auth-validator>
     </div>
 
     <button
       mat-stroked-button
-      (click)="login()"
-      [disabled]="form.invalid"
-      type="button"
+      type="submit"
     >
       Login
     </button>

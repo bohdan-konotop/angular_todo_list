@@ -21,9 +21,16 @@
         [ngClass]="{ 'todo__completed-text': item.active }"
         class="main__chb"
       >
-        {{ item.text }}
+        <!--        {{ item.text }}-->
       </mat-checkbox>
+
     </div>
+    <mat-form-field appearance="legacy" class="form__change__todo">
+      <input matInput [value]="item.text" [ngClass]="{ 'todo__completed-text': item.active }">
+      <button color="primary" mat-icon-button>
+        <mat-icon>check</mat-icon>
+      </button>
+    </mat-form-field>
     <button mat-mini-fab color="accent" (click)="deleteTodo(i)">
       <mat-icon>delete</mat-icon>
     </button>

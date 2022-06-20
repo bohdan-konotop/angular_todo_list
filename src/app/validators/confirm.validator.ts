@@ -1,23 +1,24 @@
-import { FormGroup } from "@angular/forms";
+import { FormGroup, ValidationErrors } from "@angular/forms";
 
 export function confirmPassword(
-  controlName: string,
-  matchingControlName: string
-) {
-  return (formGroup: FormGroup) => {
-    const control = formGroup.controls[controlName];
-    const matchingControl = formGroup.controls[matchingControlName];
+  controlName: FormGroup
+): ValidationErrors | null {
+  const control = controlName.get("password");
+  const matchingControl = controlName.get("confirmPassword");
 
-    if (matchingControl.errors && !matchingControl.errors["confirmPassword"]) {
-      return;
-    }
-
-    if (control.value !== matchingControl.value) {
-      matchingControl.setErrors({ confirmPassword: true });
-      return { confirmPassword: true };
-    }
-
-    matchingControl.setErrors(null);
+  if (
+    matchingControl &&
+    matchingControl.errors &&
+    !matchingControl.errors["confirmPassword"]
+  ) {
     return null;
-  };
+  }
+
+  if (control && matchingControl && control.value !== matchingControl.value) {
+    matchingControl?.setErrors({ confirmPassword: true });
+    return { confirmPassword: true };
+  }
+
+  matchingControl?.setErrors(null);
+  return null;
 }

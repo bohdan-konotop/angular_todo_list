@@ -39,13 +39,6 @@
   position: relative;
 }
 
-.auth__validation-error {
-  position: absolute;
-  bottom: 12px;
-  left: 15px;
-  color: #f44336;
-}
-
 .auth__error {
   display: flex;
   justify-content: center;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { FormArray, FormBuilder } from "@angular/forms";
 
 import { TodoList } from "../../../interfaces/todo-list.interface";
 import { TodoService } from "../../../services/todo.service";
@@ -9,6 +10,19 @@ import { TodoService } from "../../../services/todo.service";
   styleUrls: ["./todo-list.component.css"],
 })
 export class TodoListComponent implements OnInit {
+  todos: FormArray;
+  todoList: TodoList[] = [];
+
+  constructor(private todoService: TodoService, private fb: FormBuilder) {
+    this.todos = fb.array([]);
+  }
+
+  ngOnInit(): void {
+    this.todoService.getTodoListObservable().subscribe((todoList) => {
+      this.todoList = todoList;
+    });
+  }
+
   deleteTodo(todoId: number) {
     this.todoService.deleteTodo(todoId);
   }
@@ -39,17 +53,7 @@ export class TodoListComponent implements OnInit {
     );
   }
 
-  todoList: TodoList[] = [];
-
-  ngOnInit(): void {
-    this.todoService.getTodoListObservable().subscribe((todoList) => {
-      this.todoList = todoList;
-    });
-  }
-
   trackByFn(index: number) {
     return index;
   }
-
-  constructor(private todoService: TodoService) {}
 }

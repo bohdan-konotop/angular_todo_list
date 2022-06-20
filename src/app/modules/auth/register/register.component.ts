@@ -22,7 +22,8 @@ export class RegisterComponent {
         confirmPassword: ["", [Validators.required]],
       },
       {
-        validator: confirmPassword("password", "confirmPassword"),
+        validators: confirmPassword,
+        updateOn: "submit",
       }
     );
   }

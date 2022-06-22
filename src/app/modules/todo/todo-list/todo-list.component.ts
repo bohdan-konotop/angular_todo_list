@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormArray, FormBuilder } from "@angular/forms";
+import { FormArray, FormBuilder, Validators } from "@angular/forms";
 
 import { TodoList } from "../../../interfaces/todo-list.interface";
 import { TodoService } from "../../../services/todo.service";
@@ -10,17 +10,50 @@ import { TodoService } from "../../../services/todo.service";
   styleUrls: ["./todo-list.component.css"],
 })
 export class TodoListComponent implements OnInit {
-  todos: FormArray;
+  form = this.fb.group({ todos: this.fb.array([]) });
   todoList: TodoList[] = [];
+  showInputArray: boolean[] = [];
 
-  constructor(private todoService: TodoService, private fb: FormBuilder) {
-    this.todos = fb.array([]);
-  }
+  constructor(private todoService: TodoService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.patchTodos();
+  }
+
+  private patchTodos() {
     this.todoService.getTodoListObservable().subscribe((todoList) => {
+      this.todos.value.forEach(() => {
+        this.removeFromForm(this.todos.value.length - 1);
+      });
+      todoList.forEach((todo) => {
+        this.addControl(todo);
+      });
       this.todoList = todoList;
+      this.showInputArray = Array(todoList.length).fill(false);
     });
+  }
+
+  get todos() {
+    return this.form.get("todos") as FormArray;
+  }
+
+  formTodo(initValue: TodoList) {
+    return this.fb.group({
+      todo: this.fb.control(initValue.text, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(54),
+      ]),
+      active: initValue.active,
+    });
+  }
+
+  addControl(initValue: TodoList) {
+    this.todos.push(this.formTodo(initValue));
+  }
+
+  removeFromForm(i: number): void {
+    this.todos.removeAt(i);
   }
 
   deleteTodo(todoId: number) {
@@ -39,21 +72,33 @@ export class TodoListComponent implements OnInit {
   allComplete: boolean = false;
 
   updateAllComplete() {
-    this.allComplete = this.todoList.every((item) => item.active);
+    this.allComplete = this.form.value.todos.every(
+      (item: TodoList) => item.active
+    );
   }
 
   someComplete() {
-    const todoFiltered = this.todoList?.filter((todo) => todo.active) || false;
-    console.log(todoFiltered);
+    const todoFiltered =
+      this.form.value.todos?.filter((todo: TodoList) => todo.active) || false;
 
     return !(
-      this.todoList &&
-      (todoFiltered.length === this.todoList.length ||
+      this.form.value.todos &&
+      (todoFiltered.length === this.form.value.todos.length ||
         todoFiltered.length === 0)
     );
   }
 
-  trackByFn(index: number) {
-    return index;
+  updateInputBtn(index: number) {
+    if (this.todos.controls[index].invalid) {
+      this.showInputArray[index] = false;
+      return;
+    }
+    this.showInputArray[index] =
+      this.todoList[index].text !== this.form.value.todos[index].todo;
+  }
+
+  changeTodoText(index: number) {
+    const value = this.form.value.todos[index].todo;
+    this.todoService.changeTodoText(index, value);
   }
 }

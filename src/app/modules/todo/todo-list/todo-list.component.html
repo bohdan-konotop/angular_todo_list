@@ -1,4 +1,4 @@
-<main *ngIf="todoList?.length || 0 > 0" class="main">
+<main *ngIf="todos?.length || 0 > 0" [formGroup]="form" class="main">
   <div class="main__choose-all">
     <mat-checkbox
       color="warn"
@@ -10,29 +10,29 @@
     </mat-checkbox>
   </div>
   <div
-    *ngFor="let item of todoList; index as i; trackBy: trackByFn"
-    class="main__item"
+    *ngFor="let control of todos.controls; index as i;"
+    formArrayName="todos" class="main__item"
   >
     <div class="main__item__todo">
       <mat-checkbox
         color="accent"
-        [checked]="item.active"
+        [checked]="!!control.value.active"
         (change)="changeCheckbox(i)"
-        [ngClass]="{ 'todo__completed-text': item.active }"
+        [ngClass]="{ 'todo__completed-text': control.value.active }"
         class="main__chb"
       >
-        <!--        {{ item.text }}-->
       </mat-checkbox>
-
     </div>
-    <mat-form-field appearance="legacy" class="form__change__todo">
-      <input matInput [value]="item.text" [ngClass]="{ 'todo__completed-text': item.active }">
-      <button color="primary" mat-icon-button>
+    <mat-form-field appearance="legacy" class="form__change__todo" [formGroupName]="i">
+      <input matInput formControlName="todo" (ngModelChange)="updateInputBtn(i)"
+             [ngClass]="{ 'todo__completed-text': control.value.active }">
+      <button *ngIf="showInputArray[i]" (click)="changeTodoText(i)" color="primary" mat-icon-button>
         <mat-icon>check</mat-icon>
       </button>
     </mat-form-field>
     <button mat-mini-fab color="accent" (click)="deleteTodo(i)">
       <mat-icon>delete</mat-icon>
     </button>
+    <app-todo-validator [control]="control.get('todo')"></app-todo-validator>
   </div>
 </main>

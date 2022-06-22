@@ -1,0 +1,6 @@
+.todo__validation-error {
+  position: absolute;
+  bottom: -5px;
+  left: 35px;
+  color: #f44336;
+}

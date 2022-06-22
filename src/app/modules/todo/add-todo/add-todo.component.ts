@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { TodoService } from "../../../services/todo.service";
 import { DatabaseService } from "../../../services/database.service";
 import { TodoList } from "../../../interfaces/todo-list.interface";
@@ -10,34 +10,27 @@ import { TodoList } from "../../../interfaces/todo-list.interface";
   styleUrls: ["./add-todo.component.css"],
 })
 export class AddTodoComponent {
-  todo: FormGroup;
-
   constructor(
     private fb: FormBuilder,
     private todoService: TodoService,
     private db: DatabaseService
-  ) {
-    this.todo = fb.group({
-      text: [
-        null,
-        [
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(54),
-        ],
-      ],
-    });
-  }
+  ) {}
+
+  form = this.fb.group({
+    text: [
+      "",
+      [Validators.required, Validators.minLength(2), Validators.maxLength(54)],
+    ],
+  });
 
   onSubmit() {
-    if (!this.todo.valid) return;
-    this.todoService.addTodo(this.todo.value.text);
-    this.todo.reset();
+    if (!this.form.valid) return;
+    this.todoService.addTodo(this.form.value.text);
+    this.form.reset();
     this.scrollToBottom();
   }
 
   backupSave: TodoList[] = [];
-  todoList: TodoList[] = [];
 
   saveTodo() {
     this.db.getUserTodo().subscribe((todoList) => {

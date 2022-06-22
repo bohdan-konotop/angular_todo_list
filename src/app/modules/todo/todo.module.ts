@@ -13,6 +13,7 @@ import { HeaderProfileComponent } from "./header-profile/header-profile.componen
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { TodoValidatorComponent } from "./todo-validator/todo-validator.component";
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
     TodoListComponent,
     AddTodoComponent,
     HeaderProfileComponent,
+    TodoValidatorComponent,
   ],
   exports: [TodoComponent],
 })

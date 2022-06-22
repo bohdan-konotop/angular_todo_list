@@ -14,6 +14,7 @@
 }
 
 .main__item {
+  position: relative;
   padding-top: 15px;
 }
 
@@ -22,7 +23,7 @@
 }
 
 .main__item__todo {
-  display: flex
+  display: flex;
 }
 
 .form__change__todo {
@@ -38,4 +39,8 @@
 :host /deep/ .mat-form-field-appearance-legacy .mat-form-field-infix {
   display: flex;
   padding: 9px 0 6px 0;
+}
+
+:host /deep/ input.mat-input-element {
+  min-height: 41px;
 }

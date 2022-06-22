@@ -57,5 +57,9 @@ export class TodoService {
     this.todoList.next(filtered);
   }
 
-  constructor() {}
+  changeTodoText(todoId: number, value: string) {
+    let todoList = this.todoList.value;
+    todoList[todoId].text = value;
+    this.todoList.next(todoList);
+  }
 }

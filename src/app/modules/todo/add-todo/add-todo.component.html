@@ -1,17 +1,17 @@
 <div class="add-todo">
-	<form [formGroup]="todo" (ngSubmit)="onSubmit()">
-		<mat-form-field appearance="outline" class="form__add-todo">
-			<div class="form__add-todo__wrapper">
-				<input matNativeControl formControlName="text" id="todo" type="text" name="todo"
-							 placeholder="Add Todo.." class="form__add-todo__input">
-				<button mat-mini-fab (click)="onSubmit()" [disabled]="todo.invalid" type="button">
-					<mat-icon>add</mat-icon>
-				</button>
-			</div>
-		</mat-form-field>
-	</form>
-	<div class="save">
-		<a *ngIf="(backupSave?.length || 0) > 0" (click)="undo()" class="undo__save">Undo</a>
-		<a (click)="saveTodo()" class="save__todo">Save todo</a>
-	</div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="form__add-todo">
+      <div class="form__add-todo__wrapper">
+        <input matNativeControl formControlName="text" id="todo" type="text" name="todo"
+               placeholder="Add Todo.." class="form__add-todo__input">
+        <button mat-mini-fab (click)="onSubmit()" [disabled]="form.invalid" type="button">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-form-field>
+  </form>
+  <div class="save">
+    <a *ngIf="(backupSave?.length || 0) > 0" (click)="undo()" class="undo__save">Undo</a>
+    <a (click)="saveTodo()" class="save__todo">Save todo</a>
+  </div>
 </div>

@@ -36,11 +36,11 @@ export class AddTodoComponent {
     this.db.getUserTodo().subscribe((todoList) => {
       this.backupSave = todoList.val();
     });
-    this.db.saveTodo().catch(console.error);
+    this.db.saveTodo();
   }
 
   undo() {
-    this.db.saveTodo(this.backupSave).catch(console.error);
+    this.db.saveTodo(this.backupSave);
     this.backupSave = [];
   }
 

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import {
   Auth,
-  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   signOut,
 } from "@angular/fire/auth";
 import { LoginData } from "../interfaces/login-data.interface";
@@ -16,7 +16,7 @@ export class AuthService {
   isUserExist: boolean = true;
   isEmailInUse: boolean = false;
 
-  login({ email, password }: LoginData) {
+  login({ email, password }: LoginData): Promise<any> {
     this.isUserExist = true;
     return signInWithEmailAndPassword(this.auth, email, password)
       .then(() => this.router.navigate(["todo"]))
@@ -30,7 +30,7 @@ export class AuthService {
     return this.isUserExist;
   }
 
-  register({ username, email, password }: LoginData) {
+  register({ username, email, password }: LoginData): Promise<boolean | void> {
     this.isEmailInUse = false;
     return createUserWithEmailAndPassword(this.auth, email, password)
       .then((callback) => {
@@ -58,6 +58,7 @@ export class AuthService {
         console.error(e);
       });
   }
+
   constructor(
     private auth: Auth,
     private router: Router,

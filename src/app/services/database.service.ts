@@ -17,9 +17,9 @@ import { TodoList } from "../interfaces/todo-list.interface";
   providedIn: "root",
 })
 export class DatabaseService {
-  constructor(public todoService: TodoService) {}
+  constructor(private todoService: TodoService) {}
 
-  addUser(userId: string, username: string) {
+  addUser(userId: string, username: string): void {
     const db = getDatabase();
     set(ref(db, "users/" + userId), {
       username: username,
@@ -38,9 +38,9 @@ export class DatabaseService {
     );
   }
 
-  saveTodo(todoList: TodoList[] | null = null) {
+  saveTodo(todoList: TodoList[] | null = null): void {
     const db = getDatabase();
-    return update(ref(db, `users/${this.getUserId()}`), {
+    update(ref(db, `users/${this.getUserId()}`), {
       todoList: todoList ? todoList : this.todoService.getTodoList(),
     })
       .then(() => {
@@ -52,13 +52,18 @@ export class DatabaseService {
       });
   }
 
-  getUserTodo() {
+  getUserTodo(): Observable<any> {
     const dbRef = ref(getDatabase());
-    return from(get(child(dbRef, `users/${this.getUserId()}/todoList`)));
+    const getTodoListPath = child(dbRef, `users/${this.getUserId()}/todoList`);
+    const getTodoList = get(getTodoListPath);
+
+    return from(getTodoList);
   }
 
-  deleteUserData() {
+  deleteUserData(): Promise<void> {
     const db = getDatabase();
-    return remove(ref(db, `users/${this.getUserId()}`)).catch(console.error);
+    const getUserPath = ref(db, `users/${this.getUserId()}`);
+
+    return remove(getUserPath).catch(console.error);
   }
 }

@@ -14,15 +14,15 @@ export class TodoService {
     return this.todoList$;
   }
 
-  getTodoList() {
+  getTodoList(): TodoList[] {
     return this.todoList.value;
   }
 
-  getUserTodo(todoList: TodoList[]) {
+  getUserTodo(todoList: TodoList[]): void {
     this.todoList.next(todoList);
   }
 
-  addTodo(todo: string) {
+  addTodo(todo: string): void {
     this.todoList.next([
       ...(this.todoList?.value || []),
       {
@@ -32,7 +32,7 @@ export class TodoService {
     ]);
   }
 
-  allChecked(checked: boolean) {
+  allChecked(checked: boolean): void {
     const source = this.todoList.value;
     const activeList = source.map((todo) => {
       todo.active = checked;
@@ -41,23 +41,23 @@ export class TodoService {
     this.todoList.next(activeList);
   }
 
-  changeCheckbox(i: number) {
+  changeCheckbox(i: number): void {
     const todoList = this.todoList.value;
     todoList[i].active = !todoList[i].active;
     this.todoList.next(todoList);
   }
 
-  deleteTodo(todoId: number) {
+  deleteTodo(todoId: number): void {
     const todoList = this.todoList.value;
     this.todoList.next(todoList.filter((todo, index) => index !== todoId));
   }
 
-  deleteActiveTodo() {
+  deleteActiveTodo(): void {
     const filtered = this.todoList.value.filter((todo) => !todo.active);
     this.todoList.next(filtered);
   }
 
-  changeTodoText(todoId: number, value: string) {
+  changeTodoText(todoId: number, value: string): void {
     let todoList = this.todoList.value;
     todoList[todoId].text = value;
     this.todoList.next(todoList);

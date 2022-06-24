@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import {
   child,
+  DataSnapshot,
   get,
   getDatabase,
   ref,
@@ -52,11 +53,11 @@ export class DatabaseService {
       });
   }
 
-  getUserTodo(): Observable<any> {
+  getUserTodo(): Observable<DataSnapshot> {
     const dbRef = ref(getDatabase());
     const getTodoListPath = child(dbRef, `users/${this.getUserId()}/todoList`);
     const getTodoList = get(getTodoListPath);
-
+    console.log(from(getTodoList));
     return from(getTodoList);
   }
 
